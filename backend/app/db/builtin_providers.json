@@ -54,5 +54,13 @@
     "logo": "Ollama",
     "api_key": "",
     "base_url": "http://127.0.0.1:11434/v1"
+  },
+  {
+    "id": "bailian",
+    "name": "Bailian",
+    "type": "built-in",
+    "logo": "Qwen",
+    "api_key": "",
+    "base_url": "https://dashscope.aliyuncs.com/compatible-mode/v1"
   }
 ]

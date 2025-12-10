@@ -7,7 +7,18 @@ from app.utils.logger import get_logger
 logging= get_logger(__name__)
 class OpenAICompatibleProvider:
     def __init__(self, api_key: str, base_url: str, model: Union[str, None]=None):
-        self.client = OpenAI(api_key=api_key, base_url=base_url)
+        # 针对阿里云DashScope API的特殊处理
+        if 'dashscope.aliyuncs.com' in base_url:
+            # 阿里云不需要Bearer前缀，直接使用API Key
+            self.client = OpenAI(
+                api_key=api_key,
+                base_url=base_url,
+                default_headers={
+                    "Authorization": f"{api_key}",  # 不使用Bearer
+                }
+            )
+        else:
+            self.client = OpenAI(api_key=api_key, base_url=base_url)
         self.model = model
 
     @property
